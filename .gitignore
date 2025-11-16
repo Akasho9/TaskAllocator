@@ -19,3 +19,7 @@ results/
 *.pth
 .DS_Store
 main.py
+TaskAllocator/
+*.pyc
+__pycache__/
+*.log
