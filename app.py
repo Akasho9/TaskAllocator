@@ -24,7 +24,7 @@ output_dir = Path('visualizations')
 output_dir.mkdir(exist_ok=True)
 
 print("Creating visualizations...")
-print("="*70)
+print("=" * 70)
 
 # Load data
 developers_df = pd.read_csv('data/developers.csv')
@@ -71,7 +71,7 @@ ax2.set_title('Task Allocation by Priority', fontsize=13, fontweight='bold', pad
 
 plt.tight_layout()
 plt.savefig(output_dir / '1_task_distribution.png', dpi=300, bbox_inches='tight')
-print(f"   ✓ Saved: {output_dir / '1_task_distribution.png'}")
+print(f"Saved: {output_dir / '1_task_distribution.png'}")
 
 # ============================================================================
 # 2. CONFIDENCE SCORES ANALYSIS
@@ -107,7 +107,7 @@ for bar in bars:
 
 plt.tight_layout()
 plt.savefig(output_dir / '2_confidence_analysis.png', dpi=300, bbox_inches='tight')
-print(f"   ✓ Saved: {output_dir / '2_confidence_analysis.png'}")
+print(f"Saved: {output_dir / '2_confidence_analysis.png'}")
 
 # ============================================================================
 # 3. TECHNOLOGY EXPERTISE HEATMAP
@@ -145,7 +145,7 @@ ax.set_ylabel('Developer', fontsize=11, fontweight='bold')
 
 plt.tight_layout()
 plt.savefig(output_dir / '3_technology_heatmap.png', dpi=300, bbox_inches='tight')
-print(f"   ✓ Saved: {output_dir / '3_technology_heatmap.png'}")
+print(f"Saved: {output_dir / '3_technology_heatmap.png'}")
 
 # ============================================================================
 # 4. GRAPH STRUCTURE VISUALIZATION
@@ -214,7 +214,7 @@ ax.axis('off')
 
 plt.tight_layout()
 plt.savefig(output_dir / '4_graph_structure.png', dpi=300, bbox_inches='tight')
-print(f"   ✓ Saved: {output_dir / '4_graph_structure.png'}")
+print(f"Saved: {output_dir / '4_graph_structure.png'}")
 
 # ============================================================================
 # 5. COMPLEXITY vs CONFIDENCE
@@ -251,18 +251,18 @@ ax.grid(alpha=0.3)
 
 plt.tight_layout()
 plt.savefig(output_dir / '5_complexity_vs_confidence.png', dpi=300, bbox_inches='tight')
-print(f"   ✓ Saved: {output_dir / '5_complexity_vs_confidence.png'}")
+print(f"Saved: {output_dir / '5_complexity_vs_confidence.png'}")
 
 # ============================================================================
 # SUMMARY
 # ============================================================================
-print("\n" + "="*70)
-print("✅ ALL VISUALIZATIONS CREATED SUCCESSFULLY!")
-print("="*70)
+print("\n" + "=" * 70)
+print("ALL VISUALIZATIONS CREATED SUCCESSFULLY!")
+print("=" * 70)
 print(f"\nGenerated {len(list(output_dir.glob('*.png')))} visualizations in '{output_dir}/' directory:")
 for img in sorted(output_dir.glob('*.png')):
-    print(f"   📊 {img.name}")
-print("\n" + "="*70)
+    print(f"   {img.name}")
+print("\n" + "=" * 70)
 
 if __name__ == "__main__":
-    print("\n✨ Visualization Dashboard Complete!")
+    print("\nVisualization Dashboard Complete!")
