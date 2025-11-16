@@ -8,7 +8,7 @@
 | Hensi Solanki | M25AI1090 | G24AIT115 |
 | Akash Singh | M25AI1043 | G24AIT054 |
 
-**Course:** Software Development Engineering - Major Project  
+**Course:** SDE - Major Project  
 **Academic Year:** 2024-2026
 
 ---
