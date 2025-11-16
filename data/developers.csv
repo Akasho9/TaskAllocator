@@ -1,0 +1,11 @@
+developer_id,name,years_experience,primary_language,specialization
+DEV001,Sarah Chen,8,Python,Machine Learning
+DEV002,Marcus Johnson,5,JavaScript,Frontend Development
+DEV003,Priya Sharma,12,Java,Backend Architecture
+DEV004,Alex Rodriguez,6,Python,Data Engineering
+DEV005,Emma Wilson,4,TypeScript,Full Stack Development
+DEV006,Raj Patel,10,C++,Systems Programming
+DEV007,Lisa Anderson,7,Go,Microservices
+DEV008,Kevin Zhang,3,Python,DevOps Automation
+DEV009,Sophia Martinez,9,Rust,Performance Engineering
+DEV010,David Kim,11,Java,Enterprise Solutions

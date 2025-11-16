@@ -1,0 +1,16 @@
+project_id,project_name,developer_id,role,start_date,end_date,contribution_score
+PROJ001,AI Vision Platform,DEV001,Lead ML Engineer,2024-01-15,2024-11-15,0.92
+PROJ001,AI Vision Platform,DEV004,Data Engineer,2024-01-15,2024-11-15,0.78
+PROJ002,E-Commerce Portal,DEV002,Frontend Lead,2024-03-01,2024-10-30,0.88
+PROJ002,E-Commerce Portal,DEV003,Backend Lead,2024-03-01,2024-10-30,0.85
+PROJ002,E-Commerce Portal,DEV005,Full Stack Developer,2024-04-15,2024-10-30,0.73
+PROJ003,Analytics Pipeline,DEV004,Platform Lead,2024-02-10,2024-11-10,0.91
+PROJ003,Analytics Pipeline,DEV001,ML Integration,2024-05-20,2024-11-10,0.67
+PROJ004,System Optimizer,DEV006,Core Developer,2024-01-05,2024-09-30,0.95
+PROJ004,System Optimizer,DEV009,Performance Engineer,2024-01-05,2024-09-30,0.89
+PROJ005,Microservices Platform,DEV007,Architecture Lead,2024-04-01,2024-11-15,0.93
+PROJ005,Microservices Platform,DEV008,DevOps Engineer,2024-04-01,2024-11-15,0.81
+PROJ006,Enterprise Suite,DEV010,Technical Lead,2024-01-10,2024-12-31,0.94
+PROJ006,Enterprise Suite,DEV003,Senior Developer,2024-02-01,2024-12-31,0.82
+PROJ007,Cloud Migration,DEV008,DevOps Lead,2024-06-01,2024-11-20,0.87
+PROJ007,Cloud Migration,DEV007,Infrastructure Architect,2024-06-01,2024-11-20,0.79

@@ -1,0 +1,31 @@
+skill_id,developer_id,technology,proficiency_level,years_used
+SKILL001,DEV001,Python,Expert,8
+SKILL002,DEV001,TensorFlow,Advanced,5
+SKILL003,DEV001,PyTorch,Advanced,4
+SKILL004,DEV002,JavaScript,Expert,5
+SKILL005,DEV002,React,Expert,4
+SKILL006,DEV002,Node.js,Intermediate,3
+SKILL007,DEV003,Java,Expert,12
+SKILL008,DEV003,Spring Boot,Expert,10
+SKILL009,DEV003,PostgreSQL,Advanced,11
+SKILL010,DEV004,Python,Advanced,6
+SKILL011,DEV004,Apache Spark,Advanced,5
+SKILL012,DEV004,Airflow,Intermediate,4
+SKILL013,DEV005,TypeScript,Expert,4
+SKILL014,DEV005,React,Advanced,3
+SKILL015,DEV005,Express,Advanced,3
+SKILL016,DEV006,C++,Expert,10
+SKILL017,DEV006,Linux Kernel,Advanced,8
+SKILL018,DEV006,Assembly,Intermediate,6
+SKILL019,DEV007,Go,Expert,7
+SKILL020,DEV007,Docker,Advanced,6
+SKILL021,DEV007,Kubernetes,Advanced,5
+SKILL022,DEV008,Python,Advanced,3
+SKILL023,DEV008,Terraform,Intermediate,2
+SKILL024,DEV008,Jenkins,Intermediate,3
+SKILL025,DEV009,Rust,Expert,9
+SKILL026,DEV009,LLVM,Advanced,6
+SKILL027,DEV009,WebAssembly,Intermediate,4
+SKILL028,DEV010,Java,Expert,11
+SKILL029,DEV010,Spring,Expert,10
+SKILL030,DEV010,Oracle,Advanced,9

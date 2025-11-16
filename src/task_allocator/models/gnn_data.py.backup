@@ -1,0 +1,158 @@
+"""
+Data preparation utilities for GNN training.
+
+Converts pandas DataFrames and graph structures into PyTorch Geometric
+HeteroData format for GNN model training.
+
+Authors: Group-27
+    - Nikita Dhiman (M25AI1001)(G24AIT001)
+    - Hensi Solanki (M25AI1090)(G24AIT115)
+    - Akash Singh (M25AI1043)(G24AIT054)
+
+Date: November 2025
+"""
+
+import torch
+import numpy as np
+import pandas as pd
+from torch_geometric.data import HeteroData
+from typing import Dict, List, Tuple, Any
+import logging
+from collections import defaultdict
+
+
+class GraphDataConverter:
+    """
+    Convert graph builder outputs to PyTorch Geometric HeteroData format.
+
+    Transforms the custom graph representation into a format suitable for
+    GNN training with proper node features and edge indices.
+    """
+
+    def __init__(self, logger: logging.Logger):
+        """
+        Initialize the data converter.
+
+        Args:
+            logger: Logger instance for tracking conversion operations
+        """
+        self.logger = logger
+        self.node_id_to_idx = {}
+        self.idx_to_node_id = {}
+
+    def create_hetero_data(self,
+                          graph_builder: Any,
+                          feature_dim: int = 128) -> HeteroData:
+        """
+        Create HeteroData object from graph builder.
+
+        Converts the heterogeneous graph structure with all node types and
+        edge types into PyTorch Geometric compatible format.
+
+        Args:
+            graph_builder: GraphBuilder instance with constructed graph
+            feature_dim: Dimension for node feature vectors
+
+        Returns:
+            HeteroData object ready for GNN training
+        """
+        self.logger.info("Converting graph to PyTorch Geometric HeteroData format")
+
+        hetero_data = HeteroData()
+
+        for node_type, node_list in graph_builder.nodes.items():
+            self.logger.info(f"Processing {len(node_list)} {node_type} nodes")
+
+            self.node_id_to_idx[node_type] = {}
+            self.idx_to_node_id[node_type] = {}
+
+            node_features = []
+            for idx, node_id in enumerate(node_list):
+                self.node_id_to_idx[node_type][node_id] = idx
+                self.idx_to_node_id[node_type][idx] = node_id
+
+                if node_id in graph_builder.node_features:
+                    features = graph_builder.node_features[node_id]['features']
+
+                    if len(features) < feature_dim:
+                        padding_size = feature_dim - len(features)
+                        features = features + [0.0] * padding_size
+                    elif len(features) > feature_dim:
+                        features = features[:feature_dim]
+
+                    node_features.append(features)
+                else:
+                    node_features.append([0.0] * feature_dim)
+
+            hetero_data[node_type].x = torch.tensor(node_features, dtype=torch.float)
+            self.logger.info(f"Created feature tensor of shape {hetero_data[node_type].x.shape}")
+
+        for edge_type, edge_list in graph_builder.edges.items():
+            src_type, relation, dst_type = edge_type
+
+            self.logger.info(f"Processing {len(edge_list)} {edge_type} edges")
+
+            src_indices = []
+            dst_indices = []
+
+            for src_node, dst_node, edge_data in edge_list:
+                if src_node in self.node_id_to_idx[src_type]:
+                    src_idx = self.node_id_to_idx[src_type][src_node]
+                    dst_idx = self.node_id_to_idx[dst_type][dst_node]
+
+                    src_indices.append(src_idx)
+                    dst_indices.append(dst_idx)
+
+            if src_indices:
+                edge_index = torch.tensor([src_indices, dst_indices], dtype=torch.long)
+                hetero_data[src_type, relation, dst_type].edge_index = edge_index
+
+                self.logger.info(f"Created edge index of shape {edge_index.shape}")
+
+        self.logger.info("HeteroData creation complete")
+        return hetero_data
+
+    def create_training_pairs(self,
+                            developers_df: pd.DataFrame,
+                            technologies_df: pd.DataFrame,
+                            tasks_df: pd.DataFrame) -> List[Tuple[int, int]]:
+        """
+        Generate positive training pairs for contrastive learning.
+
+        Creates developer-task pairs based on technology skill matching
+        to serve as supervision signal during training.
+
+        Args:
+            developers_df: DataFrame with developer information
+            technologies_df: DataFrame with technology proficiencies
+            tasks_df: DataFrame with task requirements
+
+        Returns:
+            List of (developer_idx, task_idx) tuples
+        """
+        self.logger.info("Creating training pairs for contrastive learning")
+
+        from ..libs.helpers import parse_technology_list
+
+        developer_skills = defaultdict(set)
+        for _, row in technologies_df.iterrows():
+            dev_id = row['developer_id']
+            tech = row['technology']
+            developer_skills[dev_id].add(tech)
+
+        positive_pairs = []
+
+        for task_idx, task_row in tasks_df.iterrows():
+            required_techs = set(parse_technology_list(task_row['required_technologies']))
+
+            for dev_idx, dev_row in developers_df.iterrows():
+                dev_id = dev_row['developer_id']
+                dev_tech_set = developer_skills[dev_id]
+
+                overlap = len(required_techs.intersection(dev_tech_set))
+
+                if overlap > 0:
+                    positive_pairs.append((dev_idx, task_idx))
+
+        self.logger.info(f"Generated {len(positive_pairs)} positive training pairs")
+        return positive_pairs
